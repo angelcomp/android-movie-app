@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.angelica.myfavs.R
 import com.angelica.myfavs.adapter.MoviesAdapter
@@ -32,11 +33,11 @@ class SearchFragment : Fragment() {
     }
 
     private fun loadRecyclerView() {
-        val resultadoAPI = Repository.lista("soldier")
+        val resultadoAPI = Repository.lista("Evil")
 
         resultadoAPI?.search?.let {
             recyclerView.post {
-                recyclerView.layoutManager = LinearLayoutManager(context)
+                recyclerView.layoutManager = GridLayoutManager(context, 2)
                 recyclerView.adapter = MoviesAdapter(it)
             }
         }
