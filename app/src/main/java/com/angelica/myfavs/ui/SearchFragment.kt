@@ -9,7 +9,6 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.angelica.myfavs.R
 import com.angelica.myfavs.adapter.MoviesAdapter
 import com.angelica.myfavs.databinding.FragmentSearchBinding
 import com.angelica.myfavs.services.Repository
@@ -37,6 +36,20 @@ class SearchFragment : Fragment() {
             findNavController().popBackStack()
         }
 
+        var num_paginas: Int = 1
+
+        binding.nextPage.setOnClickListener {
+            num_paginas += 1
+            binding.tvNumPaginas.text = num_paginas.toString()
+        }
+
+        binding.previousPage.setOnClickListener {
+            if (num_paginas > 1) {
+                num_paginas -= 1
+                binding.tvNumPaginas.text = num_paginas.toString()
+            }
+        }
+
         return binding.root
     }
 
@@ -44,10 +57,12 @@ class SearchFragment : Fragment() {
     private fun setFloatingBtnIcon() {
         if (!clickFab) {
             binding.searchMovie.visibility = VISIBLE
+            binding.pageButtons.visibility = GONE
             clickFab = true
         } else {
             binding.searchMovie.visibility = GONE
             clickFab = false
+            binding.pageButtons.visibility = VISIBLE
             val pesquisa = binding.etInputSearch.text.toString()
 
             Thread(Runnable {
