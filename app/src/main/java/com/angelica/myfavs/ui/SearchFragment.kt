@@ -33,6 +33,10 @@ class SearchFragment : Fragment() {
             setFloatingBtnIcon()
         }
 
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
         return binding.root
     }
 
