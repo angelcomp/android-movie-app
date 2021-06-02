@@ -1,12 +1,8 @@
 package com.angelica.myfavs.services
 
-import android.util.Log
 import com.angelica.myfavs.models.ResultadoAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -34,9 +30,9 @@ object Repository {
         service = retrofit.create(Service::class.java)
     }
 
-    fun lista(search: String): ResultadoAPI? {
+    fun getLista(search: String, pagina: Int, tipo_pesquisa: String): ResultadoAPI? {
 
-        val call = service.get("558b797e", search)
+        val call = service.get("558b797e", search, pagina, tipo_pesquisa)
 
         return call.execute().body()
     }

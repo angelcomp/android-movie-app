@@ -9,7 +9,9 @@ interface Service {
     @GET("?")
     fun get(
         @Query("apikey") apikey: String,
-        @Query("s") search: String
+        @Query("s") search: String,
+        @Query("page") page: Int,
+        @Query("type") type: String
     ): Call<ResultadoAPI>
 
 }

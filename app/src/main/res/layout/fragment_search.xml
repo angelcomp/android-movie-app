@@ -22,6 +22,14 @@
         app:title="@string/app_name"
         app:titleTextColor="@color/white">
 
+        <ImageView
+            android:id="@+id/fab_search"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_search"
+            android:layout_gravity="right" />
+
     </com.google.android.material.appbar.MaterialToolbar>
 
     <ScrollView
@@ -51,44 +59,100 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_movie"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_margin="16dp"
-        android:textColorHint="@color/purple_700"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/fab_search"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_input_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="Digite o nome do filme"
-            android:inputType="text"
-            android:textSize="18dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab_search"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/add_fav"
-        android:textColor="@color/white"
-        app:icon="@drawable/ic_search"
-        app:iconTint="@color/white"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:backgroundTint="@color/gray">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:textColorHint="@color/purple_700">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_input_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:hint="Digite o nome do filme"
+                    android:inputType="text"
+                    android:textSize="18dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:textColorHint="@color/purple_700">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nun_pag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:hint="Digite a página da pesquisa"
+                    android:inputType="number"
+                    android:textSize="18dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkedButton="@id/rb_all_types"
+                android:layout_margin="8dp">
+
+                <RadioButton
+                    android:id="@+id/rb_all_types"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Todos" />
+
+                <RadioButton
+                    android:id="@+id/rb_movie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Movies" />
+
+                <RadioButton
+                    android:id="@+id/rb_game"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Games" />
+
+                <RadioButton
+                    android:id="@+id/rb_serie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Series" />
+            </RadioGroup>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_pesquisar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Pesquisar" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/page_buttons"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@color/purple_700"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:text="pagina"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/white"
             android:textSize="15dp"
             app:layout_constraintBottom_toTopOf="@+id/tv_num_paginas"
             app:layout_constraintEnd_toStartOf="@+id/next_page"
@@ -124,7 +188,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:text="1"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -137,6 +201,7 @@
             android:id="@+id/next_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/purple_700"
             android:rotation="180"
             android:src="@drawable/ic_btn_pages"
             app:layout_constraintBottom_toBottomOf="parent"
