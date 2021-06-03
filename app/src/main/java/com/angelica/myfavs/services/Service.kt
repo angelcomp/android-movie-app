@@ -11,7 +11,7 @@ interface Service {
         @Query("apikey") apikey: String,
         @Query("s") search: String,
         @Query("page") page: Int,
-        @Query("type") type: String
+        @Query("type") type: String,
+        @Query("y") anoLancamento: String
     ): Call<ResultadoAPI>
-
 }

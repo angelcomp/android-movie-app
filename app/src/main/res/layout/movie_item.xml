@@ -61,9 +61,10 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:text="tipo"
+            android:textAlignment="viewEnd"
             android:textColor="@color/black"
             android:padding="4dp"
-            android:textSize="15dp"
+            android:textSize="12dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

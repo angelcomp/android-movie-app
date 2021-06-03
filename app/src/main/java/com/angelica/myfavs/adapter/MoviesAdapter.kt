@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.angelica.myfavs.R
 import com.angelica.myfavs.models.Info
@@ -39,21 +38,20 @@ class MoviesAdapter(
 
             item?.let {
                 Glide.with(itemView.context).load(it.poster).into(imgMovie)
-
                 tvName.text = it.title
-                tvType.text = it.type.toUpperCase(Locale.ROOT)
+                tvType.text = it.type.toUpperCase(Locale.ROOT) + "\n "+ it.year
 
                 when (it.type) {
                     "movie" -> tvType.setBackgroundColor(
                         ContextCompat.getColor(
                             context,
-                            R.color.green
+                            R.color.red
                         )
                     )
                     "series" -> tvType.setBackgroundColor(
                         ContextCompat.getColor(
                             context,
-                            R.color.red
+                            R.color.green
                         )
                     )
                     "game" -> tvType.setBackgroundColor(

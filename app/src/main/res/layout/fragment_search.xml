@@ -26,9 +26,9 @@
             android:id="@+id/fab_search"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_gravity="right"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_search"
-            android:layout_gravity="right" />
+            android:src="@drawable/ic_search_off" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -59,155 +59,22 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
+    <include
+        android:id="@+id/include_card"
+        layout="@layout/search_card_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        android:backgroundTint="@color/gray">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/search_movie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:textColorHint="@color/purple_700">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_input_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:hint="Digite o nome do filme"
-                    android:inputType="text"
-                    android:textSize="18dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:textColorHint="@color/purple_700">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nun_pag"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:hint="Digite a página da pesquisa"
-                    android:inputType="number"
-                    android:textSize="18dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <RadioGroup
-                android:id="@+id/radio_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checkedButton="@id/rb_all_types"
-                android:layout_margin="8dp">
-
-                <RadioButton
-                    android:id="@+id/rb_all_types"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Todos" />
-
-                <RadioButton
-                    android:id="@+id/rb_movie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Movies" />
-
-                <RadioButton
-                    android:id="@+id/rb_game"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Games" />
-
-                <RadioButton
-                    android:id="@+id/rb_serie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Series" />
-            </RadioGroup>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_pesquisar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Pesquisar" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/page_buttons"
+    <include
+        android:id="@+id/include_button_pages"
+        layout="@layout/page_buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/purple_700"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
-
-        <ImageView
-            android:id="@+id/previous_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_btn_pages"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="pagina"
-            android:textColor="@color/white"
-            android:textSize="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_num_paginas"
-            app:layout_constraintEnd_toStartOf="@+id/next_page"
-            app:layout_constraintHeight_percent="0.4"
-            app:layout_constraintStart_toEndOf="@+id/previous_page"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_num_paginas"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="1"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/next_page"
-            app:layout_constraintHeight_percent="0.6"
-            app:layout_constraintStart_toEndOf="@+id/previous_page"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <ImageView
-            android:id="@+id/next_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/purple_700"
-            android:rotation="180"
-            android:src="@drawable/ic_btn_pages"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
