@@ -14,9 +14,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.angelica.myfavs.R
 import com.angelica.myfavs.adapter.MoviesAdapter
 import com.angelica.myfavs.databinding.FragmentSearchBinding
+import com.angelica.myfavs.models.Search
 import com.angelica.myfavs.services.Repository
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
 
     private var CLICK_LUPA_TOOLBAR = true
     private var NUM_PAGINA: Int = 1
@@ -27,6 +28,8 @@ class SearchFragment : Fragment() {
     private val recyclerView by lazy {
         binding.rvSearch
     }
+
+    private var listaInfo = listOf<Search>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,8 +50,10 @@ class SearchFragment : Fragment() {
         binding.includeCard.btnPesquisar.setOnClickListener {
             startSearch()
             if (!binding.includeCard.numPag.text.isNullOrEmpty()) {
-                NUM_PAGINA = binding.includeCard.numPag.text.toString().toInt() // NUM_PAG recebe o valor da pág digitada na pesquisa
-                binding.includeButtonPages.tvNumPaginas.text = binding.includeCard.numPag.text // o textview que representa o numero da pág atual precisa receber o valor da pagina que foi digitada na pesquisa
+                NUM_PAGINA = binding.includeCard.numPag.text.toString()
+                    .toInt() // NUM_PAG recebe o valor da pág digitada na pesquisa
+                binding.includeButtonPages.tvNumPaginas.text =
+                    binding.includeCard.numPag.text // o textview que representa o numero da pág atual precisa receber o valor da pagina que foi digitada na pesquisa
             } else {
                 NUM_PAGINA = 1
                 binding.includeButtonPages.tvNumPaginas.text = NUM_PAGINA.toString()
@@ -69,6 +74,13 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
+    override fun movieClick(position: Int) {
+        val item = SearchFragmentDirections.actionSearchFragmentToDetailFragment(
+            listaInfo[position].imdbID
+        )
+        findNavController().navigate(item)
+    }
+
     private fun startSearch() {
         val pesquisa = binding.includeCard.etInputSearch.text.toString()
         val anoLancamento = binding.includeCard.numYear.text.toString()
@@ -81,7 +93,7 @@ class SearchFragment : Fragment() {
 
     private fun getRadioGroupValue() {
         val id = binding.includeCard.radioGroup.checkedRadioButtonId
-        when(id) {
+        when (id) {
             binding.includeCard.rbAllTypes.id -> tipo_pesquisa = ""
             binding.includeCard.rbMovie.id -> tipo_pesquisa = "movie"
             binding.includeCard.rbGame.id -> tipo_pesquisa = "game"
@@ -91,17 +103,23 @@ class SearchFragment : Fragment() {
 
     private fun loadRecyclerView(pesquisa: String, tipo_pesquisa: String, anoLancamento: String) {
         val resultadoAPI = Repository.getLista(pesquisa, NUM_PAGINA, tipo_pesquisa, anoLancamento)
-        if (resultadoAPI?.search != null) {
+
+        if (resultadoAPI?.searches != null) {
+            listaInfo = resultadoAPI.searches
             setMaxPages(resultadoAPI.totalResults)
-            resultadoAPI.search.let {
+            resultadoAPI.searches.let {
                 recyclerView.post {
                     recyclerView.layoutManager = GridLayoutManager(context, 2)
-                    recyclerView.adapter = MoviesAdapter(it)
+                    recyclerView.adapter = MoviesAdapter(it, this)
                 }
             }
         } else {
             Looper.prepare()
-            Toast.makeText(context, "Não foi possível realizar a pesquisa, tente novamente", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                "Não foi possível realizar a pesquisa, tente novamente",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -110,7 +128,7 @@ class SearchFragment : Fragment() {
         if (restoDiv == 0) {
             MAX_PAGINA = totalResults / 10
         } else {
-            MAX_PAGINA = totalResults.div(10) +1
+            MAX_PAGINA = totalResults.div(10) + 1
         }
     }
 
@@ -138,13 +156,18 @@ class SearchFragment : Fragment() {
     private fun changeVisibility() {
         if (!CLICK_LUPA_TOOLBAR) {
             CLICK_LUPA_TOOLBAR = true //lupa da toolbar está "ativa" (foi clicada e card aparecerá)
-            binding.includeCard.card.visibility = VISIBLE //card que contém todos os campos para filtrar a pesquisa está visivel
-            binding.includeButtonPages.pageButtons.visibility = GONE // botões para avançar ou voltar paginas ocultos
+            binding.includeCard.card.visibility =
+                VISIBLE //card que contém todos os campos para filtrar a pesquisa está visivel
+            binding.includeButtonPages.pageButtons.visibility =
+                GONE // botões para avançar ou voltar paginas ocultos
             binding.fabSearch.setImageResource(R.drawable.ic_search_off)
         } else {
-            CLICK_LUPA_TOOLBAR = false //lupa da toolbar está "desativada" (foi clicada e card ocultará)
-            binding.includeCard.card.visibility = GONE //card que contém todos os campos para filtrar a pesquisa está oculto
-            binding.includeButtonPages.pageButtons.visibility = VISIBLE // botões para avançar ou voltar paginas visiveis
+            CLICK_LUPA_TOOLBAR =
+                false //lupa da toolbar está "desativada" (foi clicada e card ocultará)
+            binding.includeCard.card.visibility =
+                GONE //card que contém todos os campos para filtrar a pesquisa está oculto
+            binding.includeButtonPages.pageButtons.visibility =
+                VISIBLE // botões para avançar ou voltar paginas visiveis
             binding.fabSearch.setImageResource(R.drawable.ic_search)
         }
     }

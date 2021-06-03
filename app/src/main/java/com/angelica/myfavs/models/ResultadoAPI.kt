@@ -1,17 +1,18 @@
 package com.angelica.myfavs.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class ResultadoAPI(
-    @SerializedName("Search") val search : List<Info>,
+    @SerializedName("Search") val searches : List<Search>,
     val totalResults : Int,
     @SerializedName("Response") val response : Boolean
 )
 
-data class Info (
+data class Search (
     @SerializedName("Title") val title : String,
     @SerializedName("Year") val year : String,
     val imdbID : String,
     @SerializedName("Type") val type : String,
     @SerializedName("Poster") val poster : String
-)
+): Serializable
