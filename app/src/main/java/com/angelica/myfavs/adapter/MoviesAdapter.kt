@@ -5,12 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.angelica.myfavs.R
 import com.angelica.myfavs.models.Info
 import com.bumptech.glide.Glide
+import java.util.*
 
-class MoviesAdapter (
+class MoviesAdapter(
     private val items: List<Info>
 ) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
@@ -31,16 +34,41 @@ class MoviesAdapter (
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(item: Info?) = with(itemView) {
             val imgMovie = findViewById<ImageView>(R.id.movieImage)
-            //val tvYear = findViewById<TextView>(R.id.year_movie)
             val tvName = findViewById<TextView>(R.id.movieName)
-            //val tvType = findViewById<TextView>(R.id.type_movie)
+            val tvType = findViewById<TextView>(R.id.movieType)
 
             item?.let {
                 Glide.with(itemView.context).load(it.poster).into(imgMovie)
 
-                //tvYear.text = it.year
                 tvName.text = it.title
-                //tvType.text = it.type.capitalize()
+                tvType.text = it.type.toUpperCase(Locale.ROOT)
+
+                when (it.type) {
+                    "movie" -> tvType.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.green
+                        )
+                    )
+                    "series" -> tvType.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.red
+                        )
+                    )
+                    "game" -> tvType.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.blue
+                        )
+                    )
+                    else -> tvType.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.white
+                        )
+                    )
+                }
             }
         }
     }

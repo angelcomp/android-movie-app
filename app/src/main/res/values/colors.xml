@@ -12,4 +12,8 @@
     <color name="gradient1">#AB000000</color>
     <color name="gradient2">#C8000000</color>
     <color name="gradient3">#E129014A</color>
+
+    <color name="green">#E100FF19</color>
+    <color name="red">#E1FF0000</color>
+    <color name="blue">#E10088FF</color>
 </resources>
