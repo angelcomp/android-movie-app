@@ -1,6 +1,23 @@
 <resources>
     <string name="app_name">myFavs</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_fav">add Fav</string>
+
+    <string name="released">Released:</string>
+    <string name="runtime">Runtime:</string>
+    <string name="seasons">Seasons:</string>
+    <string name="language">Language:</string>
+    <string name="genre">Genre:</string>
+    <string name="country">Country:</string>
+    <string name="plot">History:</string>
+    <string name="imdb_rating">Imdb Rating:</string>
+    <string name="director">Director:</string>
+    <string name="cast">Cast:</string>
+    <string name="awards">Awards:</string>
+    <string name="ratings">Ratings:</string>
+    <string name="type">Type:</string>
+    <string name="no_information">~no information~</string>
+
+    <string name="ratings_placeholder">Source: %1$s\nValue: %2$s\n\n</string>
+
+    <string name="ad_fav">add Fav</string>
 </resources>

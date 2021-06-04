@@ -6,15 +6,24 @@
     <color name="teal_200">#29014A</color>
     <color name="teal_700">#4F5F08D8</color>
     <color name="black">#FF000000</color>
+    <color name="dark_gray">#656565</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#EEC3C1C1</color>
+
+    <color name="transparent">#00FFFFFF</color>
 
     <color name="gradient1">#AB000000</color>
     <color name="gradient2">#C8000000</color>
     <color name="gradient3">#E129014A</color>
     <color name="gradient4">#D529014A</color>
 
-    <color name="green">#00FF19</color>
+    <color name="green">#00710B</color>
     <color name="red">#FF0000</color>
     <color name="blue">#0088FF</color>
+
+    <color name="card_red">#B3FF0000</color>
+    <color name="card_orange">#B3FF3D00</color>
+    <color name="card_yellow">#B3FFC800</color>
+    <color name="card_green">#B3004201</color>
+
 </resources>

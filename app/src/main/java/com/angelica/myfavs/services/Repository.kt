@@ -1,5 +1,6 @@
 package com.angelica.myfavs.services
 
+import com.angelica.myfavs.models.Description
 import com.angelica.myfavs.models.ResultadoAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object Repository {
 
     private val service: Service
+    private val API_KEY = "558b797e"
 
     init {
         val apiUrl = "http://www.omdbapi.com/"
@@ -30,9 +32,20 @@ object Repository {
         service = retrofit.create(Service::class.java)
     }
 
-    fun getLista(search: String, pagina: Int, tipo_pesquisa: String, anoLancamento: String): ResultadoAPI? {
+    fun getLista(
+        search: String,
+        pagina: Int,
+        tipo_pesquisa: String,
+        anoLancamento: String
+    ): ResultadoAPI? {
 
-        val call = service.get("558b797e", search, pagina, tipo_pesquisa, anoLancamento)
+        val call = service.getBySearch(API_KEY, search, pagina, tipo_pesquisa, anoLancamento)
+
+        return call.execute().body()
+    }
+
+    fun getAllDescription(id: String): Description? {
+        val call = service.getByID(API_KEY, id)
 
         return call.execute().body()
     }
