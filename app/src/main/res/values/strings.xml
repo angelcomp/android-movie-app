@@ -48,4 +48,7 @@
     <string name="series_type">Series</string>
     <string name="search">Search</string>
     <string name="page">page</string>
+
+    <!--  snackbar  -->
+    <string name="snackbar">%1$s Try again!</string>
 </resources>

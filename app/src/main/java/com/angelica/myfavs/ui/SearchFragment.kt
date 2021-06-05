@@ -19,8 +19,8 @@ import com.angelica.myfavs.R
 import com.angelica.myfavs.adapter.MoviesAdapter
 import com.angelica.myfavs.databinding.FragmentSearchBinding
 import com.angelica.myfavs.models.Search
+import com.angelica.myfavs.utils.Snackbar
 import com.angelica.myfavs.viewmodel.SearchViewModel
-
 
 class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
 
@@ -66,9 +66,15 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
         recyclerView.adapter = adapter
 
         viewModel.resultAPI.observe(viewLifecycleOwner, {
-            list = it.searches
-            totalResults = it.totalResults
-            loadRecyclerView()
+            if (it.response) {
+                list = it.searches
+                totalResults = it.totalResults
+                loadRecyclerView()
+            } else {
+                val msg = getString(R.string.snackbar, it.error)
+                val snackbar = Snackbar(view, msg)
+                snackbar.showSnackbar()
+            }
         })
 
         //voltar tela
@@ -188,12 +194,16 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
     //controla os componentes que aparecem e somem ao clicar na lupa da toolbar
     private fun changeVisibility() {
         if (!CLICK_LUPA_TOOLBAR) {
-            binding.includeCard.card.visibility = VISIBLE //card que contém todos os campos para filtrar a pesquisa está visivel
-            binding.includeButtonPages.pageButtons.visibility = GONE // botões para avançar ou voltar paginas ocultos
+            //card que contém todos os campos para filtrar a pesquisa está visivel
+            binding.includeCard.card.visibility = VISIBLE
+            // botões para avançar ou voltar paginas ocultos
+            binding.includeButtonPages.pageButtons.visibility = GONE
             binding.fabSearch.setImageResource(R.drawable.ic_search_off)
         } else {
-            binding.includeCard.card.visibility = GONE //card que contém todos os campos para filtrar a pesquisa está oculto
-            binding.includeButtonPages.pageButtons.visibility = VISIBLE // botões para avançar ou voltar paginas visiveis
+            //card que contém todos os campos para filtrar a pesquisa está oculto
+            binding.includeCard.card.visibility = GONE
+            // botões para avançar ou voltar paginas visiveis
+            binding.includeButtonPages.pageButtons.visibility = VISIBLE
             binding.fabSearch.setImageResource(R.drawable.ic_search)
         }
     }

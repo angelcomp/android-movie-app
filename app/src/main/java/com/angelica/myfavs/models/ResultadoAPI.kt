@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class ResultadoAPI(
+    @SerializedName("Error") val error: String,
     @SerializedName("Search") val searches : List<Search>,
     val totalResults : Int,
     @SerializedName("Response") val response : Boolean

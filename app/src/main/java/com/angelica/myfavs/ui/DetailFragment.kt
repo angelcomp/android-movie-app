@@ -120,7 +120,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun setRatingCardBackgroundColor(imdbRating: String) {
-        try {
+        if (imdbRating != "N/A") {
             when {
                 imdbRating.toDouble() <= 3.0 -> {
                     binding.includeDescription.cardRating.setCardBackgroundColor(
@@ -150,17 +150,14 @@ class DetailFragment : Fragment() {
                         )
                     )
                 }
-                else -> {
-                    binding.includeDescription.cardRating.setCardBackgroundColor(
-                        resources.getColor(
-                            R.color.gray
-                        )
-                    )
-                }
             }
-        } catch (ex: Exception) {
-            Log.i("Exception", "setRatingCardBackgroundColor: $ex")
-            Toast.makeText(context, getString(R.string.error), Toast.LENGTH_LONG).show()
+        } else {
+            binding.includeDescription.tvImdbRating.text = "-"
+            binding.includeDescription.cardRating.setCardBackgroundColor(
+                resources.getColor(
+                    R.color.gray
+                )
+            )
         }
     }
 }
