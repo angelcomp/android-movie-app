@@ -16,6 +16,9 @@
     <string name="ratings">Ratings:</string>
     <string name="type">Type:</string>
     <string name="no_information">~no information~</string>
+    <string name="error">something is wrong :/</string>
+    <string name="final_page">You are on the last page</string>
+    <string name="first_page">You are already on the first page</string>
 
     <string name="ratings_placeholder">Source: %1$s\nValue: %2$s\n\n</string>
 

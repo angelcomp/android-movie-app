@@ -32,21 +32,11 @@ object Repository {
         service = retrofit.create(Service::class.java)
     }
 
-    fun getLista(
-        search: String,
-        pagina: Int,
-        tipo_pesquisa: String,
-        anoLancamento: String
-    ): ResultadoAPI? {
-
-        val call = service.getBySearch(API_KEY, search, pagina, tipo_pesquisa, anoLancamento)
-
-        return call.execute().body()
+    suspend fun getLista(search: String, pagina: Int, tipo_pesquisa: String, anoLancamento: String ): ResultadoAPI? {
+        return service.getBySearch(API_KEY, search, pagina, tipo_pesquisa, anoLancamento)
     }
 
-    fun getAllDescription(id: String): Description? {
-        val call = service.getByID(API_KEY, id)
-
-        return call.execute().body()
+    suspend fun getAllDescription(id: String): Description? {
+        return service.getByID(API_KEY, id)
     }
 }

@@ -12,9 +12,10 @@ import com.angelica.myfavs.models.Search
 import com.bumptech.glide.Glide
 import java.util.*
 
-class MoviesAdapter(
-    private val items: List<Search>, private val listener: OnItemClickListener
-) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(private val listener: OnItemClickListener) :
+    RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+
+    private var items: List<Search> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
@@ -24,6 +25,11 @@ class MoviesAdapter(
 
     interface OnItemClickListener {
         fun movieClick(position: Int)
+    }
+
+    fun updateList(newList: List<Search>) {
+        items = newList
+        notifyDataSetChanged()
     }
 
     override fun getItemCount() = items.size

@@ -1,11 +1,13 @@
 package com.angelica.myfavs.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +18,7 @@ import com.angelica.myfavs.databinding.FragmentDetailBinding
 import com.angelica.myfavs.models.Description
 import com.angelica.myfavs.viewmodel.DetailViewModel
 import com.bumptech.glide.Glide
+import java.lang.Exception
 
 class DetailFragment : Fragment() {
 
@@ -88,51 +91,61 @@ class DetailFragment : Fragment() {
     }
 
     private fun setTextTypeColor(type: String) {
-        when (type) {
-            "movie" -> binding.includeDescription.tvType.setTextColor(resources.getColor(R.color.red))
-            "series" -> binding.includeDescription.tvType.setTextColor(resources.getColor(R.color.green))
-            "game" -> binding.includeDescription.tvType.setTextColor(resources.getColor(R.color.blue))
-            else -> binding.includeDescription.tvType.setTextColor(resources.getColor(R.color.black))
+        try {
+            when (type) {
+                "movie" -> binding.includeDescription.tvType.setTextColor(resources.getColor(R.color.red))
+                "series" -> binding.includeDescription.tvType.setTextColor(resources.getColor(R.color.green))
+                "game" -> binding.includeDescription.tvType.setTextColor(resources.getColor(R.color.blue))
+                else -> binding.includeDescription.tvType.setTextColor(resources.getColor(R.color.black))
+            }
+        } catch (ex: Exception) {
+            Log.i("Exception", "setTextTypeColor: $ex")
+            Toast.makeText(context, getString(R.string.error), Toast.LENGTH_LONG).show()
         }
     }
 
     private fun setRatingCardBackgroundColor(imdbRating: String) {
-        when {
-            imdbRating.toDouble() <= 3.0 -> {
-                binding.includeDescription.cardRating.setCardBackgroundColor(
-                    resources.getColor(
-                        R.color.card_red
+        try {
+            when {
+                imdbRating.toDouble() <= 3.0 -> {
+                    binding.includeDescription.cardRating.setCardBackgroundColor(
+                        resources.getColor(
+                            R.color.card_red
+                        )
                     )
-                )
-            }
-            imdbRating.toDouble() <= 6.0 -> {
-                binding.includeDescription.cardRating.setCardBackgroundColor(
-                    resources.getColor(
-                        R.color.card_orange
+                }
+                imdbRating.toDouble() <= 6.0 -> {
+                    binding.includeDescription.cardRating.setCardBackgroundColor(
+                        resources.getColor(
+                            R.color.card_orange
+                        )
                     )
-                )
-            }
-            imdbRating.toDouble() <= 8.0 -> {
-                binding.includeDescription.cardRating.setCardBackgroundColor(
-                    resources.getColor(
-                        R.color.card_yellow
+                }
+                imdbRating.toDouble() <= 8.0 -> {
+                    binding.includeDescription.cardRating.setCardBackgroundColor(
+                        resources.getColor(
+                            R.color.card_yellow
+                        )
                     )
-                )
-            }
-            imdbRating.toDouble() <= 10.0 -> {
-                binding.includeDescription.cardRating.setCardBackgroundColor(
-                    resources.getColor(
-                        R.color.card_green
+                }
+                imdbRating.toDouble() <= 10.0 -> {
+                    binding.includeDescription.cardRating.setCardBackgroundColor(
+                        resources.getColor(
+                            R.color.card_green
+                        )
                     )
-                )
-            }
-            else -> {
-                binding.includeDescription.cardRating.setCardBackgroundColor(
-                    resources.getColor(
-                        R.color.gray
+                }
+                else -> {
+                    binding.includeDescription.cardRating.setCardBackgroundColor(
+                        resources.getColor(
+                            R.color.gray
+                        )
                     )
-                )
+                }
             }
+        } catch (ex: Exception) {
+            Log.i("Exception", "setRatingCardBackgroundColor: $ex")
+            Toast.makeText(context, getString(R.string.error), Toast.LENGTH_LONG).show()
         }
     }
 }
