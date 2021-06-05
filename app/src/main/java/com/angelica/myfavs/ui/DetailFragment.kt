@@ -1,5 +1,6 @@
 package com.angelica.myfavs.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,11 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.angelica.myfavs.R
 import com.angelica.myfavs.databinding.FragmentDetailBinding
 import com.angelica.myfavs.models.Description
@@ -57,7 +60,8 @@ class DetailFragment : Fragment() {
     }
 
     private fun setLayoutValues(description: Description) {
-        Glide.with(this).load(description.poster).into(binding.posterDetail)
+        var progress_bar = progressbar(this.requireContext())
+        Glide.with(this).load(description.poster).placeholder(progress_bar).error(R.drawable.img_error).into(binding.posterDetail)
 
         checkEmptyValue(description.title, binding.includeDescription.tvName)
         checkEmptyValue(description.type, binding.includeDescription.tvType)
@@ -80,6 +84,17 @@ class DetailFragment : Fragment() {
             allRatings = allRatings + "Source: ${it.source}" + "\nValue: ${it.value}\n\n"
         }
         binding.includeDescription.tvRatings.text = allRatings
+    }
+
+    private fun progressbar(context: Context): CircularProgressDrawable {
+        var prog = CircularProgressDrawable(context)
+        prog.strokeWidth = 7f
+        prog.centerRadius = 90f
+        val accent = ContextCompat.getColor(context, R.color.purple_700)
+        val white = ContextCompat.getColor(context, R.color.purple_200)
+        prog.setColorSchemeColors(accent, white)
+        prog.start()
+        return prog
     }
 
     private fun checkEmptyValue(value: String?, view: TextView) {

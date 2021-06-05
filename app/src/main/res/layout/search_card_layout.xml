@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:hint="Digite o nome do filme"
+                android:hint="@string/input_name"
                 android:inputType="text"
                 android:textSize="18dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -39,13 +39,13 @@
             android:textColorHint="@color/purple_700">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/num_pag"
+                android:id="@+id/num_pages"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:hint="Digite a página da pesquisa"
+                android:hint="@string/input_page_number"
                 android:inputType="number"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -59,9 +59,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:hint="Digite o ano de lançamento"
+                android:hint="@string/input_release_year"
                 android:inputType="number"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup
@@ -69,44 +69,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:checkedButton="@id/rb_all_types"
             android:orientation="horizontal"
-            android:weightSum="4"
-            android:checkedButton="@id/rb_all_types">
+            android:weightSum="4">
 
             <RadioButton
                 android:id="@+id/rb_all_types"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Todos" />
+                android:text="@string/all_types" />
 
             <RadioButton
                 android:id="@+id/rb_movie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Movies" />
+                android:text="@string/movies_type" />
 
             <RadioButton
                 android:id="@+id/rb_game"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Games" />
+                android:text="@string/games_type" />
 
             <RadioButton
-                android:id="@+id/rb_serie"
+                android:id="@+id/rb_series"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Series" />
+                android:text="@string/series_type" />
         </RadioGroup>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_pesquisar"
+            android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Pesquisar" />
+            android:text="@string/search" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

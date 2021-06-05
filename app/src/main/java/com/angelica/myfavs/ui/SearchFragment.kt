@@ -82,7 +82,7 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
             changeVisibility()
         }
 
-        binding.includeCard.btnPesquisar.setOnClickListener {
+        binding.includeCard.btnSearch.setOnClickListener {
             startSearch()
             //valor do text view que informa a página de pesquisa atual
             setPageValue()
@@ -134,16 +134,16 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
     }
 
     private fun setPageValue() {
-        if (!binding.includeCard.numPag.text.isNullOrEmpty()) {
+        if (!binding.includeCard.numPages.text.isNullOrEmpty()) {
             //se user informar algum valor no campo 'Year' da pesquisa
-            NUM_PAGINA = binding.includeCard.numPag.text.toString()
+            NUM_PAGINA = binding.includeCard.numPages.text.toString()
                 .toInt() // NUM_PAG recebe o valor da pág digitada na pesquisa
         } else {
             //default
             NUM_PAGINA = 1
         }
         // o textview que representa o numero da pág atual precisa receber o valor da pagina que foi digitada na pesquisa
-        binding.includeButtonPages.tvNumPaginas.text = NUM_PAGINA.toString()
+        binding.includeButtonPages.tvNumPages.text = NUM_PAGINA.toString()
     }
 
     private fun getRadioGroupValue() {
@@ -152,7 +152,7 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
             binding.includeCard.rbAllTypes.id -> searchType = ""
             binding.includeCard.rbMovie.id -> searchType = "movie"
             binding.includeCard.rbGame.id -> searchType = "game"
-            binding.includeCard.rbSerie.id -> searchType = "series"
+            binding.includeCard.rbSeries.id -> searchType = "series"
         }
     }
 
@@ -170,7 +170,7 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
             Toast.makeText(context, getString(R.string.final_page), Toast.LENGTH_SHORT).show()
         } else {
             NUM_PAGINA += 1
-            binding.includeButtonPages.tvNumPaginas.text = NUM_PAGINA.toString()
+            binding.includeButtonPages.tvNumPages.text = NUM_PAGINA.toString()
             startSearch()
         }
     }
@@ -178,7 +178,7 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
     private fun previousPage() {
         if (NUM_PAGINA > 1) {
             NUM_PAGINA -= 1
-            binding.includeButtonPages.tvNumPaginas.text = NUM_PAGINA.toString()
+            binding.includeButtonPages.tvNumPages.text = NUM_PAGINA.toString()
             startSearch()
         } else {
             Toast.makeText(context, getString(R.string.first_page), Toast.LENGTH_SHORT).show()

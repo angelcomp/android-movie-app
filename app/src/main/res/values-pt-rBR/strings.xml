@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">myFavs</string>
+    <string name="add_fav">add Fav</string>
+    <string name="released">Lançamento:</string>
+    <string name="runtime">Duração:</string>
+    <string name="seasons">Temporadas:</string>
+    <string name="language">Idioma:</string>
+    <string name="genre">Gênero:</string>
+    <string name="country">País:</string>
+    <string name="plot">Sinopse:</string>
+    <string name="imdb_rating">Avaliação Imdb:</string>
+    <string name="director">Diretor:</string>
+    <string name="cast">Elenco:</string>
+    <string name="awards">Prêmios</string>
+    <string name="ratings">Avaliações:</string>
+    <string name="type">Tipo:</string>
+    <string name="no_information">~sem informação~</string>
+    <string name="error">algo deu errado :/</string>
+    <string name="final_page">Você está na ultima página</string>
+    <string name="first_page">Você já está na primeira página</string>
+    <string name="favorite_button_description">imagem do botão para favoritar</string>
+    <string name="cover_image_description">Imagem de capa</string>
+    <string name="my_favorites_subtitle">lista de favoritos</string>
+    <string name="list_is_empty">Lista de favoritos está vazia :/</string>
+    <string name="add_favorite_button_description">botão para adicionar favorito</string>
+    <string name="search_subtitle">Pesquisar</string>
+    <string name="search_button_description">botão de lupa para pesquisar</string>
+    <string name="button_previous_page_description">botão para voltar página</string>
+    <string name="next_page_button_description">botão para próxima página</string>
+    <string name="input_name">Nome</string>
+    <string name="input_page_number">Número da página</string>
+    <string name="input_release_year">Ano de lançamento</string>
+    <string name="all_types">Todos</string>
+    <string name="movies_type">Filmes</string>
+    <string name="games_type">Jogos</string>
+    <string name="series_type">Series</string>
+    <string name="search">Pesquisar</string>
+    <string name="page">pagina</string>
+</resources>
