@@ -5,11 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.angelica.myfavs.models.ResultadoAPI
-import com.angelica.myfavs.services.Repository
+import com.angelica.myfavs.services.APIRepository
+import com.angelica.myfavs.services.FavoritesRepository
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class SearchViewModel : ViewModel() {
+class SearchViewModel(val repository: APIRepository, val favoritesRepository: FavoritesRepository) : ViewModel() {
 
     var resultAPI = MutableLiveData<ResultadoAPI>()
     var isSearchClicked = MutableLiveData<Boolean>(false)
@@ -23,7 +24,7 @@ class SearchViewModel : ViewModel() {
 
         try {
             viewModelScope.launch {
-                val res = Repository.getLista(search, pagina, tipo_pesquisa, anoLancamento)
+                val res = repository.getLista(search, pagina, tipo_pesquisa, anoLancamento)
                 res?.let {
                     resultAPI.value = it
                 }

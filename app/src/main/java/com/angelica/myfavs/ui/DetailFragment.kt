@@ -3,16 +3,13 @@ package com.angelica.myfavs.ui
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -21,20 +18,14 @@ import com.angelica.myfavs.databinding.FragmentDetailBinding
 import com.angelica.myfavs.models.Description
 import com.angelica.myfavs.viewmodel.DetailViewModel
 import com.bumptech.glide.Glide
-import java.lang.Exception
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
 
     lateinit var binding: FragmentDetailBinding
     private val args: DetailFragmentArgs by navArgs()
 
-    private val viewModel by viewModels<DetailViewModel> {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return DetailViewModel(args.ID) as T
-            }
-        }
-    }
+    private val viewModel: DetailViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +33,7 @@ class DetailFragment : Fragment() {
     ): View? {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
+        viewModel.getDescriptions(args.ID)
         viewModel.description.observe(viewLifecycleOwner, { description ->
             setLayoutValues(description)
         })
@@ -53,7 +45,7 @@ class DetailFragment : Fragment() {
 
         binding.fabFavorite.setOnClickListener {
             binding.fabFavorite.setImageResource(R.drawable.ic_full_star)
-            //todo: favoritar
+            viewModel.saveFavorite(args.ID)
         }
 
         return binding.root

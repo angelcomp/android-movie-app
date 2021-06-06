@@ -10,9 +10,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.angelica.myfavs.R
@@ -21,6 +18,7 @@ import com.angelica.myfavs.databinding.FragmentSearchBinding
 import com.angelica.myfavs.models.Search
 import com.angelica.myfavs.utils.Snackbar
 import com.angelica.myfavs.viewmodel.SearchViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
 
@@ -36,13 +34,7 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
 
     private lateinit var adapter: MoviesAdapter
 
-    private val viewModel by viewModels<SearchViewModel> {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return SearchViewModel() as T
-            }
-        }
-    }
+    private val viewModel: SearchViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
