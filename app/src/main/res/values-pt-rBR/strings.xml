@@ -38,4 +38,6 @@
     <string name="search">Pesquisar</string>
     <string name="page">pagina</string>
     <string name="snackbar">%1$s Tente de novo!</string>
+    <string name="alert_text">Estabeleça uma conexão com a Internet para continuar</string>
+    <string name="alert">Aviso</string>
 </resources>

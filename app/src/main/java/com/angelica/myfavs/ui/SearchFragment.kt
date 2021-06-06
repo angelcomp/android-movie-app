@@ -1,6 +1,10 @@
 package com.angelica.myfavs.ui
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -81,13 +85,17 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
         }
 
         binding.includeCard.btnSearch.setOnClickListener {
-            startSearch()
-            //valor do text view que informa a página de pesquisa atual
-            setPageValue()
-            //esconder o card de pesquisa
-            viewModel.changeVisibility(!CLICK_LUPA_TOOLBAR)
-            changeVisibility()
             hideKeyboard()
+            if (isNetworkAvailable()) {
+                startSearch()
+                //valor do text view que informa a página de pesquisa atual
+                setPageValue()
+                //esconder o card de pesquisa
+                viewModel.changeVisibility(!CLICK_LUPA_TOOLBAR)
+                changeVisibility()
+            } else {
+                alertDialog()
+            }
         }
 
         //avançar páginas da pesquisa
@@ -103,6 +111,29 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
         viewModel.isSearchClicked.observe(viewLifecycleOwner, {
             CLICK_LUPA_TOOLBAR = it
         })
+    }
+
+    private fun alertDialog() {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(R.string.alert)
+        builder.setMessage(R.string.alert_text)
+        builder.setIcon(R.drawable.ic_warning)
+
+        builder.setPositiveButton("OK") { dialog: DialogInterface, _: Int ->
+            findNavController().popBackStack()
+            dialog.dismiss()
+        }
+
+        val alert = builder.create()
+        alert.setCancelable(false)
+        alert.show()
+    }
+
+    fun isNetworkAvailable(): Boolean {
+        val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        var activeNetworkInfo: NetworkInfo? = null
+        activeNetworkInfo = cm.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
     }
 
     override fun onResume() {
@@ -125,10 +156,14 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
     }
 
     override fun movieClick(position: Int) {
-        val item = SearchFragmentDirections.actionSearchFragmentToDetailFragment(
-            viewModel.resultAPI.value!!.searches[position].imdbID
-        )
-        findNavController().navigate(item)
+        if (isNetworkAvailable()) {
+            val item = SearchFragmentDirections.actionSearchFragmentToDetailFragment(
+                viewModel.resultAPI.value!!.searches[position].imdbID
+            )
+            findNavController().navigate(item)
+        } else {
+            alertDialog()
+        }
     }
 
     private fun setPageValue() {
