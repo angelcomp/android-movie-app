@@ -7,4 +7,7 @@ import androidx.room.PrimaryKey
 data class Favorite (
     @PrimaryKey(autoGenerate = false)
     var id: String = "",
+    var title: String = "",
+    var plot: String = "",
+    var type: String = ""
 )

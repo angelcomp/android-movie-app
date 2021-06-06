@@ -9,11 +9,12 @@ import com.angelica.myfavs.models.Favorite
 import com.angelica.myfavs.services.APIRepository
 import com.angelica.myfavs.services.FavoritesRepository
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
-class DetailViewModel(val repository: APIRepository, val favoritesRepository: FavoritesRepository) : ViewModel() {
+class DetailViewModel(val repository: APIRepository, val favoritesRepository: FavoritesRepository) :
+    ViewModel() {
 
     var description = MutableLiveData<Description>()
+    var isFavorite = MutableLiveData<Boolean>()
 
     fun getDescriptions(id: String) {
         try {
@@ -25,12 +26,28 @@ class DetailViewModel(val repository: APIRepository, val favoritesRepository: Fa
         }
     }
 
-    fun saveFavorite(id: String) {
+    fun alreadyFav(id: String) {
         viewModelScope.launch {
-            val fav = Favorite(id)
-            favoritesRepository.addFavorito(fav)
+            val fav = favoritesRepository.getFavorite(id)
+            if (fav == null) {
+                isFavorite.postValue(false)
+            } else {
+                isFavorite.postValue(true)
+            }
         }
     }
 
-    //todo funcao para inserir fav
+    fun deleteFavorito(id: String) {
+        viewModelScope.launch {
+            favoritesRepository.deleteFavorite(id)
+        }
+        isFavorite.postValue(false)
+    }
+
+    fun saveFavorite(fav: Favorite) {
+        viewModelScope.launch {
+            favoritesRepository.addFavorite(fav)
+        }
+        isFavorite.postValue(true)
+    }
 }

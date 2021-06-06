@@ -68,5 +68,5 @@
         app:fabSize="normal"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="end|bottom"
-        app:tint="@color/white" />
+        app:tint="@color/card_yellow" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -6,11 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.angelica.myfavs.models.ResultadoAPI
 import com.angelica.myfavs.services.APIRepository
-import com.angelica.myfavs.services.FavoritesRepository
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
-class SearchViewModel(val repository: APIRepository, val favoritesRepository: FavoritesRepository) : ViewModel() {
+class SearchViewModel(val repository: APIRepository) : ViewModel() {
 
     var resultAPI = MutableLiveData<ResultadoAPI>()
     var isSearchClicked = MutableLiveData<Boolean>(false)

@@ -1,7 +1,6 @@
 package com.angelica.myfavs.dependency_injection
 
 import android.app.Application
-import android.app.Service
 import androidx.room.Room
 import com.angelica.myfavs.database.AppDatabase
 import com.angelica.myfavs.database.FavoriteDao
@@ -10,7 +9,7 @@ import com.angelica.myfavs.services.APIRepository
 import com.angelica.myfavs.services.FavoritesRepository
 import com.angelica.myfavs.services.ServiceAPI
 import com.angelica.myfavs.viewmodel.DetailViewModel
-import com.angelica.myfavs.viewmodel.FavoritosViewModel
+import com.angelica.myfavs.viewmodel.HomeViewModel
 import com.angelica.myfavs.viewmodel.SearchViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -45,7 +44,7 @@ val repositoryModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { FavoritosViewModel(get(), get()) }
+    viewModel { HomeViewModel(get(), get()) }
     viewModel { DetailViewModel(get(), get()) }
     viewModel { SearchViewModel(get(), get()) }
 }
