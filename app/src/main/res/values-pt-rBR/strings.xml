@@ -40,4 +40,7 @@
     <string name="snackbar">%1$s Tente de novo!</string>
     <string name="alert_text">Estabeleça uma conexão com a Internet para continuar</string>
     <string name="alert">Aviso</string>
+    <string name="see_more_details">veja mais detalhes</string>
+    <string name="eye_image">imagem do olho</string>
+    <string name="expand_button">botão de expansão</string>
 </resources>

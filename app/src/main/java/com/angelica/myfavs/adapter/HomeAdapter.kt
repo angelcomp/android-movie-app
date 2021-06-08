@@ -23,7 +23,7 @@ class HomeAdapter(private val listener: OnItemClickListener) :
     }
 
     interface OnItemClickListener {
-        fun favoriteClick(position: Int)
+        fun viewFavoriteDetails(position: Int)
     }
     fun updateList(newList: List<Favorite>) {
         items = newList
@@ -38,25 +38,15 @@ class HomeAdapter(private val listener: OnItemClickListener) :
         holder.bindView(item)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-
-            if (RecyclerView.NO_POSITION != position) {
-                listener.favoriteClick(position)
-            }
-        }
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindView(item: Favorite) = with(itemView) {
             val tvTitle = findViewById<TextView>(R.id.title_favorite)
             val tvType = findViewById<TextView>(R.id.hidden_type)
             val tvPlot = findViewById<TextView>(R.id.hidden_plot)
             val btnExpand = findViewById<ImageView>(R.id.expand_button)
+            val ivDelete = findViewById<ImageView>(R.id.iv_more_details)
+            val tvDelete = findViewById<TextView>(R.id.tv_more_details)
 
             item.let {
                 tvTitle.text = it.title
@@ -65,14 +55,17 @@ class HomeAdapter(private val listener: OnItemClickListener) :
             }
 
             var isExpanded = false
-
             btnExpand.setOnClickListener {
                 if (isExpanded) {
                     tvPlot.visibility = GONE
+                    tvDelete.visibility = GONE
+                    ivDelete.visibility = GONE
                     isExpanded = false
                     btnExpand.animate().rotationX(0F)
                 } else {
                     tvPlot.visibility = VISIBLE
+                    tvDelete.visibility = VISIBLE
+                    ivDelete.visibility = VISIBLE
                     isExpanded = true
                     btnExpand.animate().rotationX(180F)
                 }

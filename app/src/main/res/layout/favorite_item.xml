@@ -29,17 +29,18 @@
                 app:layout_constraintBottom_toBottomOf="@+id/title_favorite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/title_favorite"
-                app:layout_constraintTop_toTopOf="@+id/title_favorite" />
+                app:layout_constraintTop_toTopOf="@+id/title_favorite"
+                android:contentDescription="@string/expand_button" />
 
             <TextView
                 android:id="@+id/hidden_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="hidden"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toTopOf="@+id/title_favorite"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="hidden" />
 
             <TextView
                 android:id="@+id/title_favorite"
@@ -50,9 +51,9 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/hidden_plot"
                 app:layout_constraintEnd_toStartOf="@+id/expand_button"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hidden_type" />
+                app:layout_constraintTop_toBottomOf="@+id/hidden_type"
+                tools:text="Title" />
 
             <TextView
                 android:id="@+id/hidden_plot"
@@ -60,7 +61,39 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/tv_more_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_favorite" />
+
+            <ImageView
+                android:id="@+id/iv_more_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:contentDescription="@string/eye_image"
+                android:foregroundGravity="center"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_more_details"
+                app:layout_constraintEnd_toStartOf="@+id/tv_more_details"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_more_details"
+                app:srcCompat="@drawable/ic_eye"
+                app:tint="@color/purple_700" />
+
+            <TextView
+                android:id="@+id/tv_more_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/see_more_details"
+                android:textColor="@color/purple_700"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_more_details"
+                app:layout_constraintTop_toBottomOf="@+id/hidden_plot" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </ScrollView>

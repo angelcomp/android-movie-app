@@ -29,6 +29,9 @@
     <string name="my_favorites_subtitle">favorites list</string>
     <string name="list_is_empty">Favorites list is empty\n:/</string>
     <string name="add_favorite_button_description">add favorite button</string>
+    <string name="see_more_details">see more details</string>
+    <string name="eye_image">eye image</string>
+    <string name="expand_button">expand button</string>
 
     <!--  fragment_search.xml  -->
     <string name="search_subtitle">Search</string>
