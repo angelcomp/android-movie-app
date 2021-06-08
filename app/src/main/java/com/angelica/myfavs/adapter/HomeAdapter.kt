@@ -35,6 +35,11 @@ class HomeAdapter(private val listener: OnItemClickListener) :
     override fun onBindViewHolder(holder: HomeAdapter.ViewHolder, position: Int) {
         val item = items[position]
 
+        val details = holder.itemView.findViewById<TextView>(R.id.tv_more_details)
+        details.setOnClickListener {
+            listener.viewFavoriteDetails(position)
+        }
+
         holder.bindView(item)
     }
 
@@ -55,6 +60,7 @@ class HomeAdapter(private val listener: OnItemClickListener) :
             }
 
             var isExpanded = false
+
             btnExpand.setOnClickListener {
                 if (isExpanded) {
                     tvPlot.visibility = GONE

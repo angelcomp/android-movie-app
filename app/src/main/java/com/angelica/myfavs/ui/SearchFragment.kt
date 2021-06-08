@@ -99,6 +99,8 @@ class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
             }
         }
 
+        binding.includeButtonPages.tvNumPages.text = NUM_PAGINA.toString()
+
         //avançar páginas da pesquisa
         binding.includeButtonPages.nextPage.setOnClickListener {
             nextPage()
@@ -168,21 +170,20 @@ class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
     }
 
     private fun setPageValue() {
-        if (!binding.includeCard.numPages.text.isNullOrEmpty()) {
+        NUM_PAGINA = if (!binding.includeCard.numPages.text.isNullOrEmpty()) {
             //se user informar algum valor no campo 'Year' da pesquisa
-            NUM_PAGINA = binding.includeCard.numPages.text.toString()
+            binding.includeCard.numPages.text.toString()
                 .toInt() // NUM_PAG recebe o valor da pág digitada na pesquisa
         } else {
             //default
-            NUM_PAGINA = 1
+            1
         }
         // o textview que representa o numero da pág atual precisa receber o valor da pagina que foi digitada na pesquisa
         binding.includeButtonPages.tvNumPages.text = NUM_PAGINA.toString()
     }
 
     private fun getRadioGroupValue() {
-        val id = binding.includeCard.radioGroup.checkedRadioButtonId
-        when (id) {
+        when (binding.includeCard.radioGroup.checkedRadioButtonId) {
             binding.includeCard.rbAllTypes.id -> searchType = ""
             binding.includeCard.rbMovie.id -> searchType = "movie"
             binding.includeCard.rbGame.id -> searchType = "game"
@@ -192,10 +193,10 @@ class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
 
     private fun setMaxPages(totalResults: Int) {
         val restoDiv = totalResults.rem(10)
-        if (restoDiv == 0) {
-            MAX_PAGINA = totalResults / 10
+        MAX_PAGINA = if (restoDiv == 0) {
+            totalResults / 10
         } else {
-            MAX_PAGINA = totalResults.div(10) + 1
+            totalResults.div(10) + 1
         }
     }
 
