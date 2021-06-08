@@ -1,14 +1,11 @@
 package com.angelica.myfavs.adapter
 
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -17,8 +14,8 @@ import com.angelica.myfavs.models.Search
 import com.bumptech.glide.Glide
 import java.util.*
 
-class MoviesAdapter(private val listener: OnItemClickListener) :
-    RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class SearchAdapter(private val listener: OnItemClickListener) :
+    RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     private var items: List<Search> = listOf()
 
@@ -65,7 +62,7 @@ class MoviesAdapter(private val listener: OnItemClickListener) :
             val tvType = findViewById<TextView>(R.id.movieType)
 
             item?.let {
-                var progress_bar = progressbar(itemView.context)
+                val progress_bar = progressbar(itemView.context)
 
                 Glide.with(itemView.context).load(it.poster).placeholder(progress_bar).error(R.drawable.img_error).into(imgMovie)
                 tvName.text = it.title

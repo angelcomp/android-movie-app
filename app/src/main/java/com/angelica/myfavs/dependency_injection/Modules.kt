@@ -44,9 +44,9 @@ val repositoryModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { HomeViewModel(get(), get()) }
+    viewModel { HomeViewModel(get()) }
     viewModel { DetailViewModel(get(), get()) }
-    viewModel { SearchViewModel(get(), get()) }
+    viewModel { SearchViewModel(get()) }
 }
 
 val retrofitModule = module {

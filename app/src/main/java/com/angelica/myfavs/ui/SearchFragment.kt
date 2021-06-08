@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -17,14 +18,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.angelica.myfavs.R
-import com.angelica.myfavs.adapter.MoviesAdapter
+import com.angelica.myfavs.adapter.SearchAdapter
 import com.angelica.myfavs.databinding.FragmentSearchBinding
 import com.angelica.myfavs.models.Search
 import com.angelica.myfavs.utils.Snackbar
 import com.angelica.myfavs.viewmodel.SearchViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
+class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
 
     private var CLICK_LUPA_TOOLBAR = false
     private var NUM_PAGINA: Int = 1
@@ -36,7 +37,7 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentSearchBinding
 
-    private lateinit var adapter: MoviesAdapter
+    private lateinit var adapter: SearchAdapter
 
     private val viewModel: SearchViewModel by viewModel()
 
@@ -53,7 +54,7 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         if (!isAdapterCreated) {
-            adapter = MoviesAdapter(this)
+            adapter = SearchAdapter(this)
             isAdapterCreated = true
         }
 
@@ -129,7 +130,7 @@ class SearchFragment : Fragment(), MoviesAdapter.OnItemClickListener {
         alert.show()
     }
 
-    fun isNetworkAvailable(): Boolean {
+    private fun isNetworkAvailable(): Boolean {
         val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         var activeNetworkInfo: NetworkInfo? = null
         activeNetworkInfo = cm.activeNetworkInfo

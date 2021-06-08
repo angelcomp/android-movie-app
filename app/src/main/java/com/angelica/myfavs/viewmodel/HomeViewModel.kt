@@ -9,8 +9,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(val favoritesRepository: FavoritesRepository) : ViewModel() {
 
-    val listFavorites = MutableLiveData<List<Favorite>>()
-
+    val listFavorites = MutableLiveData<List<Favorite>?>()
 
     fun deleteAll() {
         viewModelScope.launch {
